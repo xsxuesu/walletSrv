@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "ad66c18e-4489-4321-9ba0-df65bfa14274",
+		"name": "wallet test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "insertaddr",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"cointype\":\"eth\",\n\"addr\":\"0xb407EE5Af76d7ccde67cc8dE2fC15Bf621F8d923\",\n\"prik\":\"bccf45b90d2e98240cf757140c25d324f826e18da6084aea6111168289af3957\"\n}"
+				},
+				"url": {
+					"raw": "http://172.16.5.92:8081/insertaddr",
+					"protocol": "http",
+					"host": [
+						"172",
+						"16",
+						"5",
+						"92"
+					],
+					"port": "8081",
+					"path": [
+						"insertaddr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetchaddr",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cointype\":\"eth\"\n}"
+				},
+				"url": {
+					"raw": "http://172.16.5.92:8081/fetchaddr",
+					"protocol": "http",
+					"host": [
+						"172",
+						"16",
+						"5",
+						"92"
+					],
+					"port": "8081",
+					"path": [
+						"fetchaddr"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "transfer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cointype\":\"eth\",\n\t\"serial\":\"000002\",\n\t\"from\":\"0xb407EE5Af76d7ccde67cc8dE2fC15Bf621F8d923\",\n\t\"to\":\"0x37039021cBA199663cBCb8e86bB63576991A28C1\",\n\t\"contract\":\"0xd4ddd341afae85d07af156f991bc36e6aec7d975\",\n\t\"value\":1\n}"
+				},
+				"url": {
+					"raw": "http://172.16.5.92:8081/transfer",
+					"protocol": "http",
+					"host": [
+						"172",
+						"16",
+						"5",
+						"92"
+					],
+					"port": "8081",
+					"path": [
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "collect",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cointype\":\"eth\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8081/collect",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"collect"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hottransfer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cointype\":\"eth\",\n\t\"serial\":\"0001\",\n\t\"from\":\"0xb407EE5Af76d7ccde67cc8dE2fC15Bf621F8d923\",\n\t\"to\":\"0x06A98EBC3E9aae240407dD15c7bA91b137eB8F8F\",\n\t\"feeaddr\":\"\",\n\t\"contract\":\"0xd4ddd341afae85d07af156f991bc36e6aec7d975\",\n\t\"value\":0.5\n}"
+				},
+				"url": {
+					"raw": "http://172.16.5.92:8081/hottransfer",
+					"protocol": "http",
+					"host": [
+						"172",
+						"16",
+						"5",
+						"92"
+					],
+					"port": "8081",
+					"path": [
+						"hottransfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getbalance",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"cointype\":\"eth\",\n\t\"addr\":\"0x06A98EBC3E9aae240407dD15c7bA91b137eB8F8F\"\n}"
+				},
+				"url": {
+					"raw": "http://172.16.5.92:8081/getbalance",
+					"protocol": "http",
+					"host": [
+						"172",
+						"16",
+						"5",
+						"92"
+					],
+					"port": "8081",
+					"path": [
+						"getbalance"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

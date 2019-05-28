@@ -1,0 +1,54 @@
+
+func GetContractBlncRPC(contract string , addr string)(float64,error){
+	var EthClientHost = fmt.Sprintf("http://%s:%s",config.RpcConfig.EthHost,config.RpcConfig.EthPort)
+	//var EthClientHost = fmt.Sprintf("http://%s:%s","127.0.0.1","7545")
+
+	readdr := addr
+
+	if strings.HasPrefix(addr,"0x"){
+		readdr = strings.TrimLeft(addr,"0x")
+	}
+
+	datastr := fmt.Sprintf("0x70a08231000000000000000000000000%s",readdr)
+
+	jsonStr := `{
+		"to":"%s",
+		"data":"%s"
+	},
+	"latest"`
+
+	fmtJson := fmt.Sprintf(jsonStr,contract,datastr)
+
+	postBody := `{"jsonrpc":"2.0","method":"eth_call","params":[%s],"id":1}`
+
+	fmtBody := fmt.Sprintf(postBody,fmtJson)
+
+	_, body, errs := gorequest.New().Post(EthClientHost).Send(fmtBody).End()
+
+	if errs != nil {
+		return float64(0),errs[0]
+	}
+
+	js, err := simplejson.NewJson([]byte(body))
+	if err != nil {
+		return float64(0),err
+	}
+	result,err  := js.Get("result").String()
+
+	if err != nil {
+		return float64(0),err
+	}
+	val := result[2:]
+
+	wei ,b:=new(big.Int).SetString("1000000000000000000",10)
+	bl , b:= new(big.Int).SetString(val,16)
+	if b {
+		balnceVal := new(big.Int).Quo(bl,wei)
+		balnceFloat :=new(big.Float).SetUint64(balnceVal.Uint64())
+		floatVal , _ := balnceFloat.Float64()
+		return floatVal ,nil
+	}else{
+		return float64(0),nil
+	}
+
+}

@@ -1,0 +1,19 @@
+DROP TABLE IF EXISTS `wx_order_card`;
+CREATE TABLE `wx_order_card` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `order_id` VARCHAR(64) NOT NULL COMMENT '订单ID',
+  `card_no` VARCHAR(64) NULL COMMENT '卡号,对应微信code',
+  `card_id` VARCHAR(64) NULL COMMENT '卡片ID',
+  `open_id` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '使用者openid',
+  `union_id` VARCHAR(64) NOT NULL DEFAULT '' COMMENT '使用者unoinid',
+  `accepter_openid` VARCHAR(64) NULL DEFAULT '' COMMENT 'accepter_openid',
+  `price` INT(10) NULL DEFAULT 0 COMMENT '卡面价格',
+  `status` INT(10) NULL DEFAULT 0 COMMENT '-1同步状态(未使用);0,待处理(用户点击充值); 1,核销完成 ;9充值完成;',
+  `consume_time` BIGINT(20) NULL COMMENT 'consumed datetime',
+  `created` BIGINT(20) NOT NULL ,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY ix_wx_order_card_no(`card_no`),
+  KEY ix_wx_order_card_order_id(`order_id`),
+  KEY ix_wx_order_card_consume_time(`consume_time`),
+  KEY ix_wx_order_card_created(`created`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='订单列表购买的卡券列表';

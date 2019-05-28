@@ -1,0 +1,140 @@
+syntax="proto3";
+
+package  proto;
+
+service Wallet {
+	rpc InsertAddress(InsertAddressRequest) returns(InsertAddressResponse){}
+	rpc GetHDAddress(GetHDAddressRequest) returns (GetHDAddressResponse){}
+	rpc SignEthTrans(SignEthTransRequest) returns(SignEthTransResponse){}
+	rpc SignBtcTrans(SignBtcTransRequest) returns(SignBtcTransResponse){}
+	rpc SignUsdtTrans(SignUsdtTransRequest) returns(SignUsdtTransResponse){}
+	rpc UpdateTransStatus(UpdateTransStatusRequest) returns(UpdateTransStatusResponse){}
+	rpc Collection(CollectionRequest) returns(CollectionResponse){}
+
+}
+//{
+//"txid" : "d54994ece1d11b19785c7248868696250ab195605b469632b7bd68130e880c9a",
+//"vout" : 1,
+//"address" : "mgnucj8nYqdrPFh2JfZSB1NmUThUGnmsqe",
+//"account" : "test label",
+//"scriptPubKey" : "76a9140dfc8bafc8419853b34d5e072ad37d1a5159f58488ac",
+//"amount" : 0.00010000,
+//"confirmations" : 6210,
+//"spendable" : true,
+//"solvable" : true
+//}
+
+message Unspent {
+	string txid = 1;
+	int32  vout = 2;
+	string address = 3;
+	string account = 4;
+	string scriptPubKey = 5;
+	float  amount = 6;
+}
+
+
+message InsertAddressRequest{
+	string cointype = 1;
+	string address = 2;
+	string privk =3;
+}
+
+message InsertAddressResponse{
+	string address = 1 ;
+	string success = 2 ;
+}
+
+message GetHDAddressRequest {
+	string cointype = 1 ;
+}
+
+message GetHDAddressResponse {
+	string addr = 1 ;
+}
+
+//prik string,nonce uint64,to string,value int64,
+//gasLimit uint64,gasPrice int64,chainID int64
+
+message SignEthTransRequest {
+	string serial = 1 ;
+	string from = 2 ;
+	string to = 3;
+	string nonce = 4;
+	string value = 5;
+	string gaslimit = 6;
+	string gasprice = 7;
+	string chainid = 8;
+	string contract = 9;
+}
+
+message SignEthTransResponse{
+	string serial = 1 ;
+	string rawhash = 2 ;
+	string success = 3 ;
+}
+
+message SignBtcTransRequest {
+	string serial = 1 ;
+	string from = 2 ;
+	string to = 3;
+	string value = 4;
+	bytes  unspentlist = 5;
+}
+
+//message SignBtcTransResponse{
+//	string serial = 1 ;
+//	string signedhash = 2 ;
+//	string success = 3 ;
+//}
+
+message SignBtcTransResponse{
+	string serial = 1 ;
+	bytes  signtx = 2 ;
+	string success = 3 ;
+}
+
+
+message SignUsdtTransRequest {
+	string serial = 1 ;
+	string from = 2 ;
+	string to = 3;
+	string value = 4;
+	bytes  unspentlist = 5;
+}
+
+message SignUsdtTransResponse{
+	string serial = 1 ;
+	string signedhash = 2 ;
+	string success = 3 ;
+}
+
+
+message UpdateTransStatusRequest{
+	string serial = 1 ;
+	string cointype = 2;
+	string txid = 3;
+	string status = 4;
+}
+
+message UpdateTransStatusResponse{
+	string serial = 1 ;
+	string cointype = 2;
+	string txid = 3;
+	string success = 4 ;
+}
+
+message CollectionRequest{
+	string cointype = 1;
+	string start = 2;
+	string end = 3;
+}
+
+message CollectionResponse{
+	string cointype = 1;
+	string isfinish = 2;
+	bytes addrlist = 3;
+}
+
+/// go get -u github.com/golang/protobuf/tree/master/protoc-gen-go
+/// protoc --go_out=plugins=grpc:. proto/wallet.proto

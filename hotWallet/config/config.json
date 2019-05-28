@@ -1,0 +1,20 @@
+{
+  "ip":"localhost",
+  "port":"8080",
+  "ethhost":"172.16.5.92",
+  "ethport":"8541",
+  "ethkeystoredir":"/var/wallet/hotservice/keystore/eth/",
+  "ethCallbackUrl":"",
+
+  "btchost":"",
+  "btcport":"",
+  "btcrpcuser":"",
+  "btcrpcpwd":"",
+  "btcCallbackUrl":"",
+
+  "usdthost":"",
+  "usdtport":"",
+  "usdtrpcuser":"",
+  "usdtprcpwd":"",
+  "usdtCallbackUrl":""
+}
