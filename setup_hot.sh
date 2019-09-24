@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "setup hot wallet"
 ## check and make dir
 if [ ! -d "/var/wallet/hotservice" ]; then
   mkdir -p /var/wallet/hotservice
